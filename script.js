@@ -220,7 +220,7 @@
         "#212121",
         "#000000",
     ];
-    var svgFiles = ["typo", "dreaming"];
+    var svgFiles = ["typo", "dreaming", "characters"];
     var closeOffset;
 
     function swatchClick() {
@@ -348,7 +348,7 @@
 })(jQuery);
 
 $("#SvgSelectorDIV").makeSVGselector();
-$("#ActivityDIV").makeSVGcolor("./src/dreaming.svg");
+// $("#ActivityDIV").makeSVGcolor("./src/dreaming.svg");
 $("#btnRandom").btnRandom();
 $("#btnClear").btnClear();
 $("#btnDownloadSVG").btnDownload();
