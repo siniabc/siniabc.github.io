@@ -220,6 +220,7 @@
         "#212121",
         "#000000",
     ];
+    var svgFiles = ["typo", "dreaming"];
     var closeOffset;
 
     function swatchClick() {
@@ -227,11 +228,22 @@
         console.log(chosenColor);
         TweenMax.to(colorHolder, fillSpeed, { backgroundColor: chosenColor });
     }
+    function fileClick() {
+        chosenFile = $(this).data("url");
+        svgURL = `./src/${chosenFile}.svg`;
+        console.log(svgURL);
+        $("#ActivityDIV").makeSVGcolor(svgURL);
+    }
     function swatchMove(e) {
         var moveTo = e.type == "mouseenter" ? swatchUp : swatchDown;
         TweenMax.to(".swatchHolder", 0.5, moveTo);
     }
-
+    function swatchClose(e) {
+        TweenMax.to(".swatchHolder", 0.5, swatchDown);
+    }
+    function swatchOpen(e) {
+        TweenMax.to(".swatchHolder", 0.5, swatchUp);
+    }
     function colorMe() {
         TweenMax.to(this, fillSpeed, { fill: chosenColor });
     }
@@ -269,6 +281,7 @@
         colorHolder = $("<li/>", { class: "colorHolder", text: "Current Color" })
             .css("background-color", chosenColor)
             .appendTo(swatchHolder);
+        $(colorHolder).on("click", swatchOpen);
 
         $.each(colors, function () {
             var swatch = $("<li/>").appendTo(swatchHolder);
@@ -277,6 +290,11 @@
             $(swatch).on("click", swatchClick);
             $(swatch).on("mouseenter mouseleave", colorRollover);
         });
+
+        var swatchCloser = $("<li/>", { class: "swatchCloser", text: "Close" }).appendTo(
+            swatchHolder
+        );
+        $(swatchCloser).on("click", swatchClose);
 
         var swatchPos = $(".colorHolder").position();
         var swatchHeight = $(".colorHolder").outerHeight(true) + swatchPos.top;
@@ -296,6 +314,17 @@
             $(svgColor).on("click", colorMe);
             $(mainHolder).makeSwatches();
             $(".swatchHolder").addClass("gray");
+        });
+    };
+    $.fn.makeSVGselector = function () {
+        mainHolder = this;
+        $.each(svgFiles, function () {
+            var file = $("<div/>", { class: "svgFile" }).appendTo(mainHolder);
+            var imageUrl = `url("./src/${this}.jpg")`;
+            $(file).css("background-image", imageUrl);
+            $(file).data("url", this);
+            $(file).on("click", fileClick);
+            $(file).on("mouseenter mouseleave", colorRollover);
         });
     };
 
@@ -318,8 +347,8 @@
     };
 })(jQuery);
 
-// $("#ActivityDIV").makeSVGcolor("https://s3-us-west-2.amazonaws.com/s.cdpn.io/40041/cheshire.svg");
-$("#ActivityDIV").makeSVGcolor("./src/cake.svg");
+$("#SvgSelectorDIV").makeSVGselector();
+$("#ActivityDIV").makeSVGcolor("./src/dreaming.svg");
 $("#btnRandom").btnRandom();
 $("#btnClear").btnClear();
 $("#btnDownloadSVG").btnDownload();

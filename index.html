@@ -2,24 +2,25 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
-        <title>CodePen - SVG Coloring Book Plugin</title>
+        <title>작품만들기</title>
         <link rel="stylesheet" href="./style.css" />
     </head>
     <body>
         <!-- partial:index.partial.html -->
         <div class="holder">
             <div class="myTitle">스티커 색칠하기</div>
-            <div class="pictures">
-                <h3 class="thumbnailTitle">Choose pictures you want</h3>
-                <div class="thumbnail" id="picture1"></div>
-                <div class="thumbnail" id="picture2"></div>
-                <div class="thumbnail" id="picture3"></div>
-                <div class="thumbnail" id="picture4"></div>
-            </div>
+            <div class="held svgSelector" id="SvgSelectorDIV"></div>
             <div class="held" id="ActivityDIV"></div>
             <div class="held">
                 <a id="btnRandom" class="button gray">Random Color</a>
                 <a id="btnClear" class="button gray">Clear Color</a>
+                <a
+                    id="btnKakao"
+                    class="button orange"
+                    onclick="window.open('http://qr.kakao.com/talk/qWe5FrrvTuEkcivi5F1eyhsJNy0-')"
+                    >Kakao-Talk</a
+                >
+                <h3 class="warning">주의!! 저장기능이 없으니 캡쳐해서 카카오톡으로 보내주세요</h3>
             </div>
         </div>
         <!-- partial -->
